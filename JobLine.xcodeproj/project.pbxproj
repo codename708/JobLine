@@ -14,6 +14,8 @@
 		15AA81081B95EB39000892D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15AA81071B95EB39000892D4 /* Images.xcassets */; };
 		15AA810B1B95EB39000892D4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15AA81091B95EB39000892D4 /* LaunchScreen.xib */; };
 		15AA81171B95EB39000892D4 /* JobLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81161B95EB39000892D4 /* JobLineTests.swift */; };
+		15AA81211B95EF16000892D4 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81201B95EF16000892D4 /* MasterViewController.swift */; };
+		15AA81231B95F056000892D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81221B95F056000892D4 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		15AA81101B95EB39000892D4 /* JobLineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobLineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15AA81151B95EB39000892D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15AA81161B95EB39000892D4 /* JobLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobLineTests.swift; sourceTree = "<group>"; };
+		15AA81201B95EF16000892D4 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		15AA81221B95F056000892D4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 			children = (
 				15AA80FD1B95EB39000892D4 /* AppDelegate.swift */,
 				15AA81021B95EB39000892D4 /* ViewController.swift */,
+				15AA81201B95EF16000892D4 /* MasterViewController.swift */,
+				15AA81221B95F056000892D4 /* DetailViewController.swift */,
 				15AA81041B95EB39000892D4 /* Main.storyboard */,
 				15AA81071B95EB39000892D4 /* Images.xcassets */,
 				15AA81091B95EB39000892D4 /* LaunchScreen.xib */,
@@ -215,7 +221,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AA81211B95EF16000892D4 /* MasterViewController.swift in Sources */,
 				15AA81031B95EB39000892D4 /* ViewController.swift in Sources */,
+				15AA81231B95F056000892D4 /* DetailViewController.swift in Sources */,
 				15AA80FE1B95EB39000892D4 /* AppDelegate.swift in Sources */,
 				15AA81011B95EB39000892D4 /* JobLine.xcdatamodeld in Sources */,
 			);
