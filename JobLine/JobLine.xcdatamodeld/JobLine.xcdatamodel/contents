@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Detail" representedClassName="JobLine.Detail" syncable="YES">
+        <attribute name="limit" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="supplement" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uptate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="job" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Job" inverseName="detail" inverseEntity="Job" syncable="YES"/>
+    </entity>
+    <entity name="Job" representedClassName="JobLine.Job" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Detail" inverseName="job" inverseEntity="Detail" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Job" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Detail" positionX="-54" positionY="0" width="128" height="135"/>
+    </elements>
 </model>
