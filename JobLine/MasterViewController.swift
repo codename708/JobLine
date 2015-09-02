@@ -89,6 +89,7 @@ class MasterViewController: UITableViewController {
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+    }
 */
     //showSortメゾットの実装
     func showSort() {
