@@ -9,11 +9,22 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate ,UITextFieldDelegate{
 
+    //var managedObjectContext: NSManagedObjectContext? = nil
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+
+    var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController()
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchedResultController = self.getFetchedResultController()
+        fetchedResultController.delegate = self
+        fetchedResultController.performFetch(nil)
+
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,6 +47,23 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //Jobオブジェクトの作成メゾット
+    func createJob(name:String) {
+        let entity = NSEntityDescription.entityForName("Job", inManagedObjectContext: managedObjectContext!)
+        let job = Job(entity: entity!, insertIntoManagedObjectContext: managedObjectContext)
+        
+        job.content = name
+        self.checkContentAndSave()
+    }
+    //入力内容のチェックと保存
+    func checkContentAndSave() {
+        var error: NSError?
+        if !managedObjectContext!.save(&error) {
+            checkAlert()
+            managedObjectContext!.rollback()
+        }
+    }
+    
     //showAlertメゾットの実装
     func showAlert(){
         let alertController = UIAlertController(title: "Update Job", message: "Please Enter Job.", preferredStyle: .Alert)
@@ -54,9 +82,9 @@ class MasterViewController: UITableViewController {
             [unowned self]action in
             if let textFields = alertController.textFields{
                 let textField = textFields[0] as! UITextField
-                println(textField.text)
-/*                self.insertNewObject(textField.text)
-*/
+                //println(textField.text)
+                //self.insertNewObject(textField.text)
+                self.createJob(textField.text)
             }
         }
         alertController.addAction(cancelAction)
@@ -66,21 +94,27 @@ class MasterViewController: UITableViewController {
     }
     
 
+    func checkAlert() {
+        let alertController = UIAlertController(title: "Error", message: "Content is empty!", preferredStyle: .Alert)
+        let dafaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(dafaultAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
 
-
+/*
     //新規モデルオブジェクトの生成
-/*    func insertNewObject(context:String){
+    func insertNewObject(content:String){
         let context = self.fetchedResultsController.managedObjectContext
         let entity = self.fetchedResultsController.fetchRequest.entity!
         //Jobオブジェクトを生成
-        let job = NSEntityDescription.insertNewObjectForEntityForName(entity.context!, inManagedObjectContext: context) as! NSManagedObject
+        let job = NSEntityDescription.insertNewObjectForEntityForName(entity.content!, inManagedObjectContext: context) as! NSManagedObject
         //Detailオブジェクトの生成
         let detail = NSEntityDescription.insertNewObjectForEntityForName("Detail", inManagedObjectContext: context) as! NSManagedObject
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         //Jobオブジェクトに名前とDetailオブジェクトをセットする
-        job.setValue(String(), forKey:"context")
+        job.setValue(String(), forKey:"content")
         job.setValue(Detail(), forKey:"detail")
         //データの保存
         var error: NSError? = nil
@@ -120,47 +154,79 @@ class MasterViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        let numberOfSections = fetchedResultController.sections?.count
+        return numberOfSections!
+    }
+    /*
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 0
+        //return self.fetchedResultsController.sections!.count
     }
-
+*/
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let numberOfRowsInsection = fetchedResultController.sections?[section].numberOfObjects
+        return numberOfRowsInsection!
+    }
+    /*
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        return sectionInfo.numberOfObjects
+
+        //return 0
     }
+*/
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let job = fetchedResultController.objectAtIndexPath(indexPath) as! Job
+        cell.textLabel?.text = job.content
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
+/*
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        self.configureCell(cell, atIndexPath: indexPath)
+        return cell
+    }
+*/
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
+        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let managedObject: NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
+        managedObjectContext?.deleteObject(managedObject)
+        managedObjectContext?.save(nil)
+    }
+/*
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let context = self.fetchedResultsController.managedObjectContext
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            
+            var error: NSError? = nil
+            if !context.save(&error) {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+        }
     }
-    */
+*/
 
+/*
+    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+        cell.textLabel!.text = object.valueForKey("content")!.description
+    }
+*/
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -176,6 +242,110 @@ class MasterViewController: UITableViewController {
     }
     */
 
+    // MARK: - Fetched results controller
+/*
+    var fetchedResultsController: NSFetchedResultsController {
+        // 既にオブジェクトが存在していればオブジェクトを返却して処理を終了
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        //このプロパティに初めてアクセスされた時の記述
+        //fetchRequestオブジェクトの生成
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("Job",
+            inManagedObjectContext: self.managedObjectContext!)
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        //データの読み込みを実行
+        var error: NSError? = nil
+        if !_fetchedResultsController!.performFetch(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        return _fetchedResultsController!
+    }
+*/
+    func getFetchedResultController() -> NSFetchedResultsController {
+        fetchedResultController = NSFetchedResultsController(fetchRequest: self.jobFetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultController
+    }
+
+    
+    func jobFetchRequest() -> NSFetchRequest {
+        let fetchRequest = NSFetchRequest(entityName: "Job")
+        let sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+    }
+    
+//    var _fetchedResultsController: NSFetchedResultsController? = nil
+    
+/*    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+*/
+    
+    
+/*
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+*/
+
+/*
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+*/
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
+    }
+/*
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+    }
+*/
+    
+    
+    
     /*
     // MARK: - Navigation
 
