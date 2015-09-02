@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MasterViewController: UITableViewController {
 
@@ -69,18 +70,18 @@ class MasterViewController: UITableViewController {
 
 
     //新規モデルオブジェクトの生成
-/*    func insertNewObject(name:String){
+/*    func insertNewObject(context:String){
         let context = self.fetchedResultsController.managedObjectContext
         let entity = self.fetchedResultsController.fetchRequest.entity!
         //Jobオブジェクトを生成
-        let job = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! NSManagedObject
+        let job = NSEntityDescription.insertNewObjectForEntityForName(entity.context!, inManagedObjectContext: context) as! NSManagedObject
         //Detailオブジェクトの生成
         let detail = NSEntityDescription.insertNewObjectForEntityForName("Detail", inManagedObjectContext: context) as! NSManagedObject
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         //Jobオブジェクトに名前とDetailオブジェクトをセットする
-        job.setValue(name, forKey:"name")
-        job.setValue(detail, forKey:"detail")
+        job.setValue(String(), forKey:"context")
+        job.setValue(Detail(), forKey:"detail")
         //データの保存
         var error: NSError? = nil
         if !context.save(&error){
