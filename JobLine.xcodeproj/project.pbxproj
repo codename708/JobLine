@@ -16,6 +16,10 @@
 		15AA81171B95EB39000892D4 /* JobLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81161B95EB39000892D4 /* JobLineTests.swift */; };
 		15AA81211B95EF16000892D4 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81201B95EF16000892D4 /* MasterViewController.swift */; };
 		15AA81231B95F056000892D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AA81221B95F056000892D4 /* DetailViewController.swift */; };
+		15CD24301B978B8900EA14C3 /* JobLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CD242F1B978B8900EA14C3 /* JobLine.png */; };
+		15CD24321B978ECA00EA14C3 /* JobLine(29x29).png in Resources */ = {isa = PBXBuildFile; fileRef = 15CD24311B978ECA00EA14C3 /* JobLine(29x29).png */; };
+		15CD24341B978EDD00EA14C3 /* JobLine(40x40).png in Resources */ = {isa = PBXBuildFile; fileRef = 15CD24331B978EDD00EA14C3 /* JobLine(40x40).png */; };
+		15CD24361B978EE800EA14C3 /* JobLine(120x120).png in Resources */ = {isa = PBXBuildFile; fileRef = 15CD24351B978EE800EA14C3 /* JobLine(120x120).png */; };
 		15F76CAB1B9729290036FABF /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F76CAA1B9729290036FABF /* Job.swift */; };
 		15F76CAD1B97292A0036FABF /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F76CAC1B97292A0036FABF /* Detail.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +48,10 @@
 		15AA81161B95EB39000892D4 /* JobLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobLineTests.swift; sourceTree = "<group>"; };
 		15AA81201B95EF16000892D4 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		15AA81221B95F056000892D4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		15CD242F1B978B8900EA14C3 /* JobLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JobLine.png; sourceTree = "<group>"; };
+		15CD24311B978ECA00EA14C3 /* JobLine(29x29).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JobLine(29x29).png"; sourceTree = "<group>"; };
+		15CD24331B978EDD00EA14C3 /* JobLine(40x40).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JobLine(40x40).png"; sourceTree = "<group>"; };
+		15CD24351B978EE800EA14C3 /* JobLine(120x120).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JobLine(120x120).png"; sourceTree = "<group>"; };
 		15F76CAA1B9729290036FABF /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		15F76CAC1B97292A0036FABF /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +113,10 @@
 		15AA80FB1B95EB39000892D4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15CD242F1B978B8900EA14C3 /* JobLine.png */,
+				15CD24311B978ECA00EA14C3 /* JobLine(29x29).png */,
+				15CD24331B978EDD00EA14C3 /* JobLine(40x40).png */,
+				15CD24351B978EE800EA14C3 /* JobLine(120x120).png */,
 				15AA80FC1B95EB39000892D4 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -176,6 +188,7 @@
 				TargetAttributes = {
 					15AA80F71B95EB39000892D4 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 8T74T7VAQQ;
 					};
 					15AA810F1B95EB39000892D4 = {
 						CreatedOnToolsVersion = 6.4;
@@ -208,7 +221,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				15AA81061B95EB39000892D4 /* Main.storyboard in Resources */,
+				15CD24321B978ECA00EA14C3 /* JobLine(29x29).png in Resources */,
+				15CD24301B978B8900EA14C3 /* JobLine.png in Resources */,
+				15CD24341B978EDD00EA14C3 /* JobLine(40x40).png in Resources */,
 				15AA810B1B95EB39000892D4 /* LaunchScreen.xib in Resources */,
+				15CD24361B978EE800EA14C3 /* JobLine(120x120).png in Resources */,
 				15AA81081B95EB39000892D4 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +377,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = JobLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -370,6 +389,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = JobLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

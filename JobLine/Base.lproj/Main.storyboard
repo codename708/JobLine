@@ -17,11 +17,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FG9-pu-xVu">
-                                <rect key="frame" x="0.0" y="214" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="268" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.84705889225006104" green="0.95294123888015747" blue="0.83921575546264648" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="50b-WP-a1C"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="JobLine">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -30,12 +31,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXa-Lz-8l5">
-                                <rect key="frame" x="0.0" y="259" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="313" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.97254908084869385" green="0.90196084976196289" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="n5p-bD-GG1"/>
                                 </constraints>
-                                <state key="normal" title="未完了">
+                                <state key="normal" title="unFinished">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -43,12 +44,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQw-vg-I2r">
-                                <rect key="frame" x="0.0" y="304" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="358" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.83921575546264648" green="0.95686280727386475" blue="0.95686280727386475" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OPL-uS-iAj"/>
                                 </constraints>
-                                <state key="normal" title="完了済み">
+                                <state key="normal" title="Finished">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -60,9 +61,9 @@
                         <constraints>
                             <constraint firstItem="xQw-vg-I2r" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="2Qe-De-sTH"/>
                             <constraint firstItem="bXa-Lz-8l5" firstAttribute="top" secondItem="FG9-pu-xVu" secondAttribute="bottom" constant="5" id="3MC-VF-ujX"/>
+                            <constraint firstAttribute="centerY" secondItem="bXa-Lz-8l5" secondAttribute="centerY" id="7TZ-hZ-XcL"/>
                             <constraint firstAttribute="trailing" secondItem="bXa-Lz-8l5" secondAttribute="trailing" id="8LC-iG-72F"/>
                             <constraint firstItem="FG9-pu-xVu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HT3-gh-Xr2"/>
-                            <constraint firstItem="FG9-pu-xVu" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="150" id="IxS-S1-4Li"/>
                             <constraint firstAttribute="centerX" secondItem="xQw-vg-I2r" secondAttribute="centerX" id="K9d-FY-dwj"/>
                             <constraint firstItem="bXa-Lz-8l5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="RDj-cm-ucT"/>
                             <constraint firstAttribute="trailing" secondItem="FG9-pu-xVu" secondAttribute="trailing" id="V5R-gk-4Ve"/>
@@ -70,7 +71,7 @@
                             <constraint firstItem="xQw-vg-I2r" firstAttribute="top" secondItem="bXa-Lz-8l5" secondAttribute="bottom" constant="5" id="yRY-Ab-1Gi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kbF-gY-54Y"/>
+                    <navigationItem key="navigationItem" title="Home" id="kbF-gY-54Y"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
