@@ -77,6 +77,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 //            text.placeholder = "Tag"})
         //キャンセルボタン
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        //続けて入力ボタン
+        let nextAction = UIAlertAction(title: "Next", style: .Default){
+            [unowned self]action in
+            if let textFields = alertController.textFields{
+                let textField = textFields[0] as! UITextField
+                //println(textField.text)
+                //self.insertNewObject(textField.text)
+                self.createJob(textField.text)
+                self.showAlert()
+            }
+        }
+
         //作成ボタン
         let defaultAction = UIAlertAction(title: "Create", style: .Default){
             [unowned self]action in
@@ -88,6 +100,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             }
         }
         alertController.addAction(cancelAction)
+        alertController.addAction(nextAction)
         alertController.addAction(defaultAction)
         //アラートビューの表示
         self.presentViewController(alertController, animated: true, completion: nil)
