@@ -11,11 +11,11 @@ import CoreData
 
 class Detail: NSManagedObject {
 
-    @NSManaged var supplement: String
-    @NSManaged var tag: String
-    @NSManaged var progress: NSNumber
-    @NSManaged var limit: NSDate
-    @NSManaged var uptate: NSDate
-    @NSManaged var job: NSSet
+    @NSManaged var supplement: String?
+    @NSManaged var tag: String?
+    @NSManaged var progress: NSNumber?
+    @NSManaged var limit: NSDate?
+    @NSManaged var uptate: NSDate?
+    @NSManaged var job: NSSet?
 
 }

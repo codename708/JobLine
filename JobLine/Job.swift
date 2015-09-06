@@ -11,7 +11,7 @@ import CoreData
 
 class Job: NSManagedObject {
 
-    @NSManaged var content: String
-    @NSManaged var detail: Detail
+    @NSManaged var content: String?
+    @NSManaged var detail: Detail?
 
 }

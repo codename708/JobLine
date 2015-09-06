@@ -211,6 +211,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Return false if you do not want the specified item to be editable.
         return true
     }
+
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let managedObject: NSManagedObject = fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
@@ -256,7 +257,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     */
 
     // MARK: - Fetched results controller
-/*
+    
+/*-------------------------------
     var fetchedResultsController: NSFetchedResultsController {
         // 既にオブジェクトが存在していればオブジェクトを返却して処理を終了
         if _fetchedResultsController != nil {
@@ -295,16 +297,50 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         return _fetchedResultsController!
     }
+    -----------------------------------------
 */
+    
+    /*--------------------------------------
+    var fetchedResultsController: NSFetchedResultsController {
+    if _fetchedResultsController != nil {
+    return _fetchedResultsController!
+    }
+    
+    let fetchRequest = NSFetchRequest()
+    //let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext:self.managedObjectContext!)
+    let entity = NSEntityDescription.entityForName("SampleEntity", inManagedObjectContext:self.managedObjectContext!)
+    fetchRequest.entity = entity
+    
+    fetchRequest.fetchBatchSize = 20
+    
+    //let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
+    let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+    let sortDescriptors = [sortDescriptor]
+    fetchRequest.sortDescriptors = [sortDescriptor]
+    
+    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+    aFetchedResultsController.delegate = self
+    _fetchedResultsController = aFetchedResultsController
+    
+    var error: NSError? = nil
+    if !_fetchedResultsController!.performFetch(&error) {
+    abort()
+    }
+    
+    return _fetchedResultsController!
+    }
+    -------------------------------------
+    */
+
     func getFetchedResultController() -> NSFetchedResultsController {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: self.jobFetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController = NSFetchedResultsController(fetchRequest: self.jobFetchRequest(), managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         return fetchedResultController
     }
 
     
     func jobFetchRequest() -> NSFetchRequest {
         let fetchRequest = NSFetchRequest(entityName: "Job")
-        let sortDescriptor = NSSortDescriptor(key: "content", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "content", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         return fetchRequest
     }
